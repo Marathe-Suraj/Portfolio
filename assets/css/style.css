@@ -348,6 +348,83 @@ h6 {
     font-size: 20px;
     line-height: 24px;
   }
+
+  #dvDownloadResume {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+#DownloadResume {
+  --offset: 8px;
+  --border-size: 2px;
+  display: block;
+  position: relative;
+  padding: 1em 1em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgb(5, 99, 187);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  outline: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 var(--border-size) currentcolor;
+  transition: background 0.8s ease;
+  margin-top: 28px;
+}
+#DownloadResume:hover {
+  background: rgba(100, 0, 0, 0.03);
+}
+.DownloadResume_horizontal,
+.DownloadResume_vertical {
+  position: absolute;
+  top: var(--horizontal-offset, 0);
+  right: var(--vertical-offset, 0);
+  bottom: var(--horizontal-offset, 0);
+  left: var(--vertical-offset, 0);
+  transition: transform 0.8s ease;
+  will-change: transform;
+}
+.DownloadResume_horizontal::before,
+.DownloadResume_vertical::before {
+  content: "";
+  position: absolute;
+  border: inherit;
+}
+.DownloadResume_horizontal {
+  --vertical-offset: calc(var(--offset) * -1);
+  border-top: var(--border-size) solid currentcolor;
+  border-bottom: var(--border-size) solid currentcolor;
+}
+.DownloadResume_horizontal::before {
+  top: calc(var(--vertical-offset) - var(--border-size));
+  bottom: calc(var(--vertical-offset) - var(--border-size));
+  left: calc(var(--vertical-offset) * -1);
+  right: calc(var(--vertical-offset) * -1);
+}
+#DownloadResume:hover .DownloadResume_horizontal {
+  transform: scaleX(0);
+}
+.DownloadResume_vertical {
+  --horizontal-offset: calc(var(--offset) * -1);
+  border-left: var(--border-size) solid currentcolor;
+  border-right: var(--border-size) solid currentcolor;
+}
+.DownloadResume_vertical::before {
+  top: calc(var(--horizontal-offset) * -1);
+  bottom: calc(var(--horizontal-offset) * -1);
+  left: calc(var(--horizontal-offset) - var(--border-size));
+  right: calc(var(--horizontal-offset) - var(--border-size));
+}
+#DownloadResume:hover .DownloadResume_vertical {
+  transform: scaleY(0);
 }
 
 /*--------------------------------------------------------------
@@ -731,7 +808,7 @@ section {
 /*--------------------------------------------------------------
 # Form Validation
 --------------------------------------------------------------*/
-.FormValidationError{
+.FormValidationError {
   border: 1px solid red;
 }
 

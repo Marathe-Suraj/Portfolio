@@ -1,5 +1,4 @@
 (function () {
-  
   //  Easy selector helper function
   const select = (el, all = false) => {
     el = el.trim();
@@ -195,4 +194,9 @@ $("#SendMessage").click(function () {
       },
     },
   });
+});
+
+// Download Resume
+$("#DownloadResume").bind("click", function () {
+  window.open("./assets/attachments/Suraj Resume - SD.pdf", "_blank");
 });
