@@ -141,11 +141,11 @@ const SendEmail = function () {
         document.getElementById("email").value = "";
         document.getElementById("subject").value = "";
         document.getElementById("message").value = "";
-        alert("Your message sent successfully!!");
+        showToast("successMsg");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => showToast("errorMsg"));
   } else {
-    alert("Please fill all the required fields");
+    showToast("errorMsg");
   }
 };
 
@@ -168,6 +168,7 @@ $("#SendMessage").click(function () {
       },
     },
     highlight: function (element) {
+      showToast(errorMsg);
       $(element).addClass("FormValidationError");
     },
     unhighlight: function (element) {
@@ -200,3 +201,36 @@ $("#SendMessage").click(function () {
 $("#DownloadResume").bind("click", function () {
   window.open("./assets/attachments/Suraj Resume - SD.pdf", "_blank");
 });
+
+// Toaster
+
+const showToast = function (msg) {
+  //const button = document.querySelector("button"),
+  toast = document.querySelector(".toast");
+  (closeIcon = document.querySelector(".close")),
+    (progress = document.querySelector(".progress"));
+
+  let timer1, timer2;
+
+  toast.classList.add("active");
+  progress.classList.add("active");
+
+  timer1 = setTimeout(() => {
+    toast.classList.remove("active");
+  }, 5000); //1s = 1000 milliseconds
+
+  timer2 = setTimeout(() => {
+    progress.classList.remove("active");
+  }, 5300);
+
+  closeIcon.addEventListener("click", () => {
+    toast.classList.remove("active");
+
+    setTimeout(() => {
+      progress.classList.remove("active");
+    }, 300);
+
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+  });
+};

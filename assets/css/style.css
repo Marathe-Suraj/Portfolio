@@ -123,7 +123,7 @@ h6 {
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 9997;
+  z-index: 1;
   transition: all 0.5s;
   padding: 15px;
   overflow-y: auto;
@@ -815,144 +815,102 @@ section {
 /*--------------------------------------------------------------
 # Toaster Notifications
 --------------------------------------------------------------*/
-.notifications {
+.toast {
   position: fixed;
-  top: 30px;
-  right: 20px;
+  top: 25px;
+  right: 25px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 20px 35px 20px 25px;
+  box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transform: translateX(calc(100% + 30px));
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
 }
-.notifications :where(.toast, .column) {
+
+.toast.active {
+  transform: translateX(0%);
+}
+
+.toast .toast-content {
   display: flex;
   align-items: center;
 }
-.notifications .toast {
-  width: 400px;
-  position: relative;
-  overflow: hidden;
-  list-style: none;
-  border-radius: 4px;
-  padding: 16px 17px;
-  margin-bottom: 10px;
-  background: var(--light);
-  justify-content: space-between;
-  animation: show_toast 0.3s ease forwards;
-}
-@keyframes show_toast {
-  0% {
-    transform: translateX(100%);
-  }
-  40% {
-    transform: translateX(-5%);
-  }
-  80% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-10px);
-  }
-}
-.notifications .toast.hide {
-  animation: hide_toast 0.3s ease forwards;
-}
-@keyframes hide_toast {
-  0% {
-    transform: translateX(-10px);
-  }
-  40% {
-    transform: translateX(0%);
-  }
-  80% {
-    transform: translateX(-5%);
-  }
-  100% {
-    transform: translateX(calc(100% + 20px));
-  }
-}
-.toast::before {
-  position: absolute;
-  content: "";
-  height: 3px;
-  width: 100%;
-  bottom: 0px;
-  left: 0px;
-  animation: progress 5s linear forwards;
-}
-@keyframes progress {
-  100% {
-    width: 0%;
-  }
-}
-.toast.success::before,
-.btn#success {
-  background: var(--success);
-}
-.toast.error::before,
-.btn#error {
-  background: var(--error);
-}
-.toast.warning::before,
-.btn#warning {
-  background: var(--warning);
-}
-.toast.info::before,
-.btn#info {
-  background: var(--info);
-}
-.toast.random::before,
-.btn#random {
-  background: var(--random);
-}
-.toast .column i {
-  font-size: 1.75rem;
-}
-.toast.success .column i {
-  color: var(--success);
-}
-.toast.error .column i {
-  color: var(--error);
-}
-.toast.warning .column i {
-  color: var(--warning);
-}
-.toast.info .column i {
-  color: var(--info);
-}
-.toast.random .column i {
-  color: var(--random);
-}
-.toast .column span {
-  font-size: 1.07rem;
-  margin-left: 12px;
-}
-.toast i:last-child {
-  color: #aeb0d7;
-  cursor: pointer;
-}
-.toast i:last-child:hover {
-  color: var(--dark);
-}
-.buttons .btn {
-  border: none;
-  outline: none;
-  cursor: pointer;
-  margin: 0 5px;
-  color: var(--light);
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  border-radius: 4px;
+
+.toast-content .check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  min-width: 35px;
+  background-color: #2770ff;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
 }
 
-@media screen and (max-width: 530px) {
-  .notifications {
-    width: 95%;
+.toast-content .message {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.message .text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.message .text.text-1 {
+  font-weight: 600;
+  color: #333;
+}
+
+.toast .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.toast .close:hover {
+  opacity: 1;
+}
+
+.toast .progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+}
+
+.toast .progress:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #2770ff;
+}
+
+.progress.active:before {
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  100% {
+    right: 100%;
   }
-  .notifications .toast {
-    width: 100%;
-    font-size: 1rem;
-    margin-left: 20px;
-  }
-  .buttons .btn {
-    margin: 0 1px;
-    font-size: 1.1rem;
-    padding: 8px 15px;
-  }
+}
+
+.toast.active ~ button {
+  pointer-events: none;
+}
+
+.toast:not(.show) {
+  display: block !important;
 }

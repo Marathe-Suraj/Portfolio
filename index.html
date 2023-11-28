@@ -145,6 +145,30 @@
     <!-- End Hero -->
 
     <main id="main">
+      <div class="toast">
+        <div class="toast-content">
+          <i class="fas fa-solid fa-check check"></i>
+
+          <div class="message">
+            <!-- <span class="text text-1">Success</span> -->
+            <span class="text text-2"
+              >Your message has been successfully sent.</span
+            >
+          </div>
+          <div class="progress"></div>
+        </div>
+
+        <i class="fa-solid fa-xmark close"></i>
+      </div>
+
+      <div class="buttons">
+        <button class="success" onclick='showToast("successMsg")'>
+          Success
+        </button>
+      </div>
+
+      <div id="toast"></div>
+
       <!-- ======= About Section ======= -->
       <section id="about" class="about">
         <div class="container" data-aos="fade-up">
