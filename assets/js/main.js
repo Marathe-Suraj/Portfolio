@@ -146,12 +146,14 @@ const SendEmail = function () {
         $(".loading").hide();
       })
       .catch((err) => {
+        $(".loading").hide();
         $(".error-message").show();
         setTimeout(function () {
           $(".error-message").hide();
         }, 3000);
       });
   } else {
+    $(".loading").hide();
     $(".error-message").show();
     setTimeout(function () {
       $(".error-message").hide();
