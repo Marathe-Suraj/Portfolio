@@ -123,6 +123,7 @@
 
 //  Send mail of contact page
 const SendEmail = function () {
+  $(".loading").show();
   if ($("#EmailForm").valid()) {
     var params = {
       name: document.getElementById("name").value,
@@ -141,11 +142,20 @@ const SendEmail = function () {
         document.getElementById("email").value = "";
         document.getElementById("subject").value = "";
         document.getElementById("message").value = "";
-        showToast("successMsg");
+        showToast();
+        $(".loading").hide();
       })
-      .catch((err) => showToast("errorMsg"));
+      .catch((err) => {
+        $(".error-message").show();
+        setTimeout(function () {
+          $(".error-message").hide();
+        }, 3000);
+      });
   } else {
-    showToast("errorMsg");
+    $(".error-message").show();
+    setTimeout(function () {
+      $(".error-message").hide();
+    }, 3000);
   }
 };
 
@@ -168,7 +178,6 @@ $("#SendMessage").click(function () {
       },
     },
     highlight: function (element) {
-      showToast(errorMsg);
       $(element).addClass("FormValidationError");
     },
     unhighlight: function (element) {
@@ -204,8 +213,7 @@ $("#DownloadResume").bind("click", function () {
 
 // Toaster
 
-const showToast = function (msg) {
-  //const button = document.querySelector("button"),
+const showToast = function () {
   toast = document.querySelector(".toast");
   (closeIcon = document.querySelector(".close")),
     (progress = document.querySelector(".progress"));
