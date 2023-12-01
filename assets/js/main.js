@@ -123,6 +123,7 @@
 
 //  Send mail of contact page
 const SendEmail = function () {
+  $(".loading").show();
   if ($("#EmailForm").valid()) {
     var params = {
       name: document.getElementById("name").value,
@@ -141,11 +142,20 @@ const SendEmail = function () {
         document.getElementById("email").value = "";
         document.getElementById("subject").value = "";
         document.getElementById("message").value = "";
-        alert("Your message sent successfully!!");
+        showToast();
+        $(".loading").hide();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        $(".error-message").show();
+        setTimeout(function () {
+          $(".error-message").hide();
+        }, 3000);
+      });
   } else {
-    alert("Please fill all the required fields");
+    $(".error-message").show();
+    setTimeout(function () {
+      $(".error-message").hide();
+    }, 3000);
   }
 };
 
@@ -200,3 +210,35 @@ $("#SendMessage").click(function () {
 $("#DownloadResume").bind("click", function () {
   window.open("./assets/attachments/Suraj Resume - SD.pdf", "_blank");
 });
+
+// Toaster
+
+const showToast = function () {
+  toast = document.querySelector(".toast");
+  (closeIcon = document.querySelector(".close")),
+    (progress = document.querySelector(".progress"));
+
+  let timer1, timer2;
+
+  toast.classList.add("active");
+  progress.classList.add("active");
+
+  timer1 = setTimeout(() => {
+    toast.classList.remove("active");
+  }, 5000); //1s = 1000 milliseconds
+
+  timer2 = setTimeout(() => {
+    progress.classList.remove("active");
+  }, 5300);
+
+  closeIcon.addEventListener("click", () => {
+    toast.classList.remove("active");
+
+    setTimeout(() => {
+      progress.classList.remove("active");
+    }, 300);
+
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+  });
+};

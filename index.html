@@ -145,6 +145,21 @@
     <!-- End Hero -->
 
     <main id="main">
+      <div class="toast">
+        <div class="toast-content">
+          <i class="fas fa-solid fa-check check"></i>
+
+          <div class="message">
+            <span class="text text-2">Your message has been sent. Thank you!</span>
+          </div>
+          <div class="progress"></div>
+        </div>
+
+        <i class="fa-solid fa-xmark close"></i>
+      </div>
+
+      <div id="toast"></div>
+
       <!-- ======= About Section ======= -->
       <section id="about" class="about">
         <div class="container" data-aos="fade-up">
@@ -159,11 +174,11 @@
             </p>
           </div>
 
-          <div class="row">
+          <div class="row about-content">
             <div class="col-lg-4">
               <img
                 src="./assets/img/profile-img.jpg"
-                class="img-fluid"
+                class="img-fluid profile-image"
                 alt=""
               />
             </div>
@@ -236,12 +251,12 @@
           <div class="row skills-content">
             <div class="col-lg-6">
               <div class="progress">
-                <span class="skill">HTML <i class="val">100%</i></span>
+                <span class="skill">HTML <i class="val">90%</i></span>
                 <div class="progress-bar-wrap">
                   <div
                     class="progress-bar"
                     role="progressbar"
-                    aria-valuenow="100"
+                    aria-valuenow="90"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
@@ -249,12 +264,12 @@
               </div>
 
               <div class="progress">
-                <span class="skill">CSS <i class="val">90%</i></span>
+                <span class="skill">CSS <i class="val">80%</i></span>
                 <div class="progress-bar-wrap">
                   <div
                     class="progress-bar"
                     role="progressbar"
-                    aria-valuenow="90"
+                    aria-valuenow="80"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
@@ -537,9 +552,8 @@
                 </div>
                 <div class="my-3">
                   <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">
-                    Your message has been sent. Thank you!
+                  <div class="error-message">
+                    Something wents wrong :(
                   </div>
                 </div>
                 <div class="text-center">
