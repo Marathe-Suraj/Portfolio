@@ -214,7 +214,6 @@ $("#DownloadResume").bind("click", function () {
 });
 
 // Toaster
-
 const showToast = function () {
   toast = document.querySelector(".toast");
   (closeIcon = document.querySelector(".close")),
@@ -244,3 +243,28 @@ const showToast = function () {
     clearTimeout(timer2);
   });
 };
+
+// Total experiance dynamic calculation
+const lucreskillTechJoiningDate = '2021-01';
+const lucreskillTechLeavingDate = '2021-09';
+const hbitsJoiningDate = '2021-01';
+const hbitsLeavingDate = new Date();
+let TotalExperiance = parseFloat(parseFloat(calculateTotalExperience(lucreskillTechJoiningDate, lucreskillTechLeavingDate)) + parseFloat(calculateTotalExperience(hbitsJoiningDate, hbitsLeavingDate))).toFixed(1);
+$('.TotalExperience').text(TotalExperiance);
+function calculateTotalExperience(startDate, endDate) {
+  const start = new Date(`${startDate}-01`);
+  const end = new Date(`${endDate}-01`);
+
+  const years = end.getUTCFullYear() - start.getUTCFullYear();
+  const months = end.getUTCMonth() - start.getUTCMonth();
+
+  return `${years}.${months}`;
+}
+
+// Age dynamic calculation
+const birthDate = '1999-09';
+const currentDate = new Date();
+$('.Age').text(parseInt(calculateTotalExperience(birthDate, currentDate)));
+
+// Footer year dynamic calculation
+$('.CopyrightYear').text(new Date().getFullYear());
