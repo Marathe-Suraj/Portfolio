@@ -174,6 +174,10 @@ nav {
     transition: #0563bb 0.1s linear;
     box-shadow: 0px 10px 10px -8px #0563bb;
 
+    > a {
+      color: #fff;
+    }
+
     > a:hover {
       color: #fff;
     }
