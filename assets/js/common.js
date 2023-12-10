@@ -7,6 +7,22 @@ var Common = {
   currentDate: new Date(),
 
   Init: function () {
+
+    // Scrollbar get stick on the top
+    $(window).scroll(function() {
+      var scrollTop = $(window).scrollTop();    
+      if (scrollTop >= 100) {
+          $('.navbar').addClass('solid-nav');
+      } else {
+          $('.navbar').removeClass('solid-nav');
+      }    
+    });
+
+    // Hide navbar on click of the links
+    $('.navLinks a').on('click', function () {
+      $('.navbar-collapse').collapse('hide');
+    });
+
     // Total experiance dynamic calculation
     let TotalExperiance = parseFloat(
       parseFloat(
