@@ -1,7 +1,7 @@
 var Common = {
   lucreskillTechJoiningDate: "2021-01",
   lucreskillTechLeavingDate: "2021-09",
-  hbitsJoiningDate: "2021-01",
+  hbitsJoiningDate: "2021-11",
   hbitsLeavingDate: new Date(),
   birthDate: "1999-09",
   currentDate: new Date(),
@@ -9,35 +9,34 @@ var Common = {
   Init: function () {
 
     // Scrollbar get stick on the top
-    $(window).scroll(function() {
-      var scrollTop = $(window).scrollTop();    
+    $(window).scroll(function () {
+      var scrollTop = $(window).scrollTop();
       if (scrollTop >= 100) {
-          $('.navbar').addClass('solid-nav');
+        $(".navbar").addClass("solid-nav");
       } else {
-          $('.navbar').removeClass('solid-nav');
-      }    
+        $(".navbar").removeClass("solid-nav");
+      }
     });
 
     // Hide navbar on click of the links
-    $('.navLinks a').on('click', function () {
-      $('.navbar-collapse').collapse('hide');
+    $(".navLinks a").on("click", function () {
+      $(".navbar-collapse").collapse("hide");
     });
 
-    // Total experiance dynamic calculation
-    let TotalExperiance = parseFloat(
-      parseFloat(
-        Common.calculateDateDifference(
-          Common.lucreskillTechJoiningDate,
-          Common.lucreskillTechLeavingDate
-        )
-      ) +
-        parseFloat(
-          Common.calculateDateDifference(
-            Common.hbitsJoiningDate,
-            Common.hbitsLeavingDate
-          )
-        )
-    ).toFixed(1);
+    let lucreskillTech = Common.calculateDateDifference(
+      Common.lucreskillTechJoiningDate,
+      Common.lucreskillTechLeavingDate
+    );
+
+    let hbits = Common.calculateDateDifference(
+      Common.hbitsJoiningDate,
+      Common.hbitsLeavingDate
+    );
+
+    let experianceArray = [lucreskillTech, hbits];
+    let TotalExperiance =
+      Common.individualExperianceCalculator(experianceArray);
+
     $(".TotalExperience").text(TotalExperiance);
 
     // Age dynamic calculation
@@ -121,7 +120,7 @@ var Common = {
       };
       window.addEventListener("load", toggleBacktotop);
       Common.onscroll(document, toggleBacktotop);
-    };
+    }
     window.addEventListener("load", Common.navbarlinksActive);
     Common.onscroll(document, Common.navbarlinksActive);
   },
@@ -154,7 +153,7 @@ var Common = {
   },
 
   //  Navbar links active state on scroll
-  
+
   navbarlinksActive: function () {
     var navbarlinks = Common.select("#navbar .scrollto", true);
     let position = window.scrollY + 200;
@@ -178,10 +177,32 @@ var Common = {
     const start = new Date(`${startDate}-01`);
     const end = new Date(`${endDate}-01`);
 
-    const years = end.getUTCFullYear() - start.getUTCFullYear();
-    const months = end.getUTCMonth() - start.getUTCMonth();
+    let years = end.getUTCFullYear() - start.getUTCFullYear();
+    let months = end.getUTCMonth() - start.getUTCMonth();
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
 
     return `${years}.${months}`;
-  }
+  },
+
+  individualExperianceCalculator: function (individualExperiance) {
+    let totalYears = 0;
+    let totalMonths = 0;
+
+    individualExperiance.forEach((diff) => {
+      const [years, months] = diff.split(".").map(parseFloat);
+      totalYears += years;
+      totalMonths += months;
+    });
+
+    // Adjust for overflow in months
+    totalYears += Math.floor(totalMonths / 12);
+    totalMonths %= 12;
+
+    return `${totalYears}.${totalMonths}`;
+  },
 };
 Common.Init();
