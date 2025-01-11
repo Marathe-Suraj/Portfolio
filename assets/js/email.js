@@ -1,5 +1,4 @@
 var Email = {
-  
   emailJSPublicKey: "IjlemfY4pC4cRXMj8",
   serviceID: "service_f4patoq",
   templateID: "template_4woz0az",
